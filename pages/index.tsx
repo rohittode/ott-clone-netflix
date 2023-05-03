@@ -63,7 +63,7 @@ const Home = ({
           {/* My List Components */}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
-          <Row title="Romance Movies" movies={romanceMovies} />
+          {/* <Row title="Romance Movies" movies={romanceMovies} /> */}
           <Row title="Documentaries" movies={documentaries} />
           </section>
       </main>

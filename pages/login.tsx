@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+
+
+
 function Login() {
 
   interface Inputs {
@@ -32,23 +35,34 @@ function Login() {
 
     return (
       <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
+       
         <Head>
           <title>Netflix</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Image
-          src={"https://rb.gy/p2hphi"}
+        {/* <Image
+          // src={"https://rb.gy/p2hphi"}
           // alt={""}
           alt=""
-          // src="https://rb.gy/p2hphi"
+          src="https://rb.gy/p2hphi"
+         height={1080}
+         width={1920}
+          // layout="fill"
+          className="-z-10 !hidden opacity-60 sm:!inline"
+          // objectFit="cover"
+
+        /> */}
+
+
+
+
+<Image
+          src="https://rb.gy/p2hphi"
           layout="fill"
           className="-z-10 !hidden opacity-60 sm:!inline"
-          objectFit="cover"
-        />
-        {/* <img
-        src="https://rb.gy/p2hphi"
-        className="-z-10 !hidden opacity-60 sm:!inline"
-      /> */}
+          objectFit="cover" alt={""}      />
+        
+        
 
         <img
           src="https://rb.gy/ulxxee"
@@ -56,6 +70,10 @@ function Login() {
           width={150}
           height={150}
         />
+
+
+
+
 
         <form onSubmit={handleSubmit(onSubmit)}
           className="relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0 md:max-w-md md:px-14"
