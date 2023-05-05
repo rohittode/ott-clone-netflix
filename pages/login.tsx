@@ -57,7 +57,10 @@ function Login() {
 
 
 <Image
-          src="https://rb.gy/p2hphi"
+          // src="https://rb.gy/p2hphi"
+          // src="https://rb.gy/lxphh"
+          src={"https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png"}
+          
           layout="fill"
           className="-z-10 !hidden opacity-60 sm:!inline"
           objectFit="cover" alt={""}      />
