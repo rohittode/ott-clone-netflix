@@ -1,7 +1,4 @@
-
-// import { modalState } from "@/atoms/modalAtom";
 import Head from "next/head";
-// import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { modalState } from "@/atoms/modalAtom";
 import Banner from "@/components/Banner";
@@ -11,9 +8,6 @@ import useAuth from "@/hooks/useAuth";
 import { Movie } from "@/typings";
 import requests from "@/utils/requests";
 import Modal from "@/components/Modal";
-// import Modal from "@/components/Modal";
-// import type { NextPage } from "next";
-// import Image from "next/image";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -36,15 +30,17 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
-  const { loading } = useAuth()
-  const showModal = useRecoilValue(modalState)
+  const { loading } = useAuth();
+  const showModal = useRecoilValue(modalState);
 
-  if(loading) return null
+  if (loading) return null;
 
   return (
-    <div className={`relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh] ${
-      showModal && '!h-screen overflow-hidden'
-    }`}>
+    <div
+      className={`relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh] ${
+        showModal && "!h-screen overflow-hidden"
+      }`}
+    >
       <Head>
         <title>Home - Netflix</title>
         <link rel="icon" href="/favicon.ico" />
@@ -65,7 +61,7 @@ const Home = ({
           <Row title="Scary Movies" movies={horrorMovies} />
           {/* <Row title="Romance Movies" movies={romanceMovies} /> */}
           <Row title="Documentaries" movies={documentaries} />
-          </section>
+        </section>
       </main>
       {/* Model */}
       {showModal && <Modal />}
