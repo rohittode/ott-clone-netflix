@@ -60,7 +60,7 @@ const Home = ({
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           {/* <Row title="Romance Movies" movies={romanceMovies} /> */}
-          <Row title="Documentaries" movies={documentaries} />
+          {/* <Row title="Documentaries" movies={documentaries} /> */}
         </section>
       </main>
       {/* Model */}
