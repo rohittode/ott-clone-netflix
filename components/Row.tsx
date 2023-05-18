@@ -2,10 +2,11 @@ import { Movie } from "@/typings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import Thumbnail from "./Thumbnail";
 import { useRef, useState } from "react";
+import { DocumentData } from "firebase/firestore";
 
 interface Props {
   title: string;
-  movies: Movie[];
+  movies: Movie[] | DocumentData[];
 }
 
 function Row({ title, movies }: Props) {
@@ -39,7 +40,7 @@ function Row({ title, movies }: Props) {
         />
 
         <div
-          className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide md:space-x-2.5 md:p-2"
+          className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide md:space-x-2.5 md:p-2 "
           ref={rowRef}
         >
           {movies.map((movie) => (
@@ -48,7 +49,7 @@ function Row({ title, movies }: Props) {
         </div>
 
         <ChevronRightIcon
-          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100"
+          className="absolute top-0 bottom-0 right-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100 "
           onClick={() => handleClick("right")}
         />
       </div>

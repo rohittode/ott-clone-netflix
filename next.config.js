@@ -1,16 +1,19 @@
-/** @type {import('next').NextConfig} */
-// const nextConfig = {
+// /** @type {import('next').NextConfig} */
+
+// module.exports = {
 //   reactStrictMode: true,
 //   images: {
-//     domains: ["image.tmdb.org"],
+//     domains: ['image.tmdb.org','rb.gy','www.notebookcheck.net','image.tmdb.org/t/p/original'],
 //   },
 // }
 
-// module.exports = nextConfig
+const withTM = require('next-transpile-modules')([
+  '@stripe/firestore-stripe-payments',
+]) // pass the modules you would like to see transpiled
 
-module.exports = {
+module.exports = withTM({
   reactStrictMode: true,
   images: {
     domains: ['image.tmdb.org','rb.gy','www.notebookcheck.net','image.tmdb.org/t/p/original'],
   },
-}
+})
