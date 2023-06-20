@@ -21,7 +21,7 @@ function Account({ products }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={`bg-[#141414]`}>
-        <Link href="/main">
+        <Link href="/Home">
           <img
             src="https://rb.gy/ulxxee"
             width={120}

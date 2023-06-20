@@ -187,7 +187,9 @@ function Modal() {
     setShowModal(false);
   };
 
-  
+  const goto = () => {
+    router.push("/Play");
+  };
 
 
   return (
@@ -217,6 +219,8 @@ function Modal() {
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
               <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+              // onClick={goto} onClick={handleClose}
+              onClick={()=> {goto(); handleClose();}}
               >
                 <FaPlay className="h-7 w-7 text-black" />
                 Play

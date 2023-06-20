@@ -24,7 +24,7 @@ function Plans({ products }: Props) {
     if (!user) return;
     loadCheckout(selectedPlan?.prices[0].id!);
     setBillingLoading(true);
-    router.push("/main");
+    router.push("/Home");
   };
 
   return (

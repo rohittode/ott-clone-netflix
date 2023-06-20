@@ -24,7 +24,6 @@ import {
 } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "@/firebase";
-import router from "next/router";
 
 function Modal() {
   const [showModal, setShowModal] = useRecoilState(modalState);
@@ -34,7 +33,7 @@ function Modal() {
   const [muted, setMuted] = useState(false);
   // for mute mode
   // const [muted, setMuted] = useState(true)
-  const [addedToList, setAddedToList] = useState(false);
+//   const [addedToList, setAddedToList] = useState(false);
   const [addedToLike, setAddedToLike] = useState(false);
   const { user } = useAuth();
   const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
@@ -73,59 +72,6 @@ function Modal() {
 
     fetchMovie();
   }, [movie]);
-
-  // Find all the movies in the user's list
-  useEffect(() => {
-    if (user) {
-      return onSnapshot(
-        collection(db, "customers", user.uid, "myList"),
-        (snapshot) => setMovies(snapshot.docs)
-      );
-    }
-  }, [db, movie?.id]);
-
-  // Check if the movie is already in the user's list
-  useEffect(
-    () =>
-      setAddedToList(
-        movies.findIndex((result) => result.data().id === movie?.id) !== -1
-      ),
-    [movies]
-  );
-
-  const handleList = async () => {
-    if (addedToList) {
-      await deleteDoc(
-        doc(db, "customers", user!.uid, "myList", movie?.id.toString()!)
-      );
-
-      toast(
-        `${movie?.title || movie?.original_name} has been removed from My List`,
-        {
-          duration: 8000,
-          style: toastStyle,
-        }
-      );
-    } else {
-      await setDoc(
-        doc(db, "customers", user!.uid, "myList", movie?.id.toString()!),
-        {
-          ...movie,
-        }
-      );
-
-      toast(
-        `${movie?.title || movie?.original_name} has been added to My List.`,
-        {
-          duration: 8000,
-          style: toastStyle,
-        }
-      );
-    }
-  };
-
-
-
 
 
   // Find all the movies in the user's like
@@ -178,17 +124,9 @@ function Modal() {
     }
   };
 
-
-
-
-
-
   const handleClose = () => {
     setShowModal(false);
   };
-
-  
-
 
   return (
     <MuiModal
@@ -216,17 +154,9 @@ function Modal() {
           />
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
-              <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
-              >
+              <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
                 <FaPlay className="h-7 w-7 text-black" />
                 Play
-              </button>
-              <button className="modalButton" onClick={handleList}>
-                {addedToList ? (
-                  <CheckIcon className="h-7 w-7" />
-                ) : (
-                  <PlusIcon className="h-7 w-7" />
-                )}
               </button>
 
               <button className="modalButton" 

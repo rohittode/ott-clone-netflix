@@ -34,10 +34,11 @@ function Modal() {
   const [muted, setMuted] = useState(false);
   // for mute mode
   // const [muted, setMuted] = useState(true)
-  const [addedToList, setAddedToList] = useState(false);
+//   const [addedToList, setAddedToList] = useState(false);
   const [addedToLike, setAddedToLike] = useState(false);
   const { user } = useAuth();
   const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
 
   const toastStyle = {
     background: "white",
@@ -74,65 +75,12 @@ function Modal() {
     fetchMovie();
   }, [movie]);
 
-  // Find all the movies in the user's list
-  useEffect(() => {
-    if (user) {
-      return onSnapshot(
-        collection(db, "customers", user.uid, "myList"),
-        (snapshot) => setMovies(snapshot.docs)
-      );
-    }
-  }, [db, movie?.id]);
-
-  // Check if the movie is already in the user's list
-  useEffect(
-    () =>
-      setAddedToList(
-        movies.findIndex((result) => result.data().id === movie?.id) !== -1
-      ),
-    [movies]
-  );
-
-  const handleList = async () => {
-    if (addedToList) {
-      await deleteDoc(
-        doc(db, "customers", user!.uid, "myList", movie?.id.toString()!)
-      );
-
-      toast(
-        `${movie?.title || movie?.original_name} has been removed from My List`,
-        {
-          duration: 8000,
-          style: toastStyle,
-        }
-      );
-    } else {
-      await setDoc(
-        doc(db, "customers", user!.uid, "myList", movie?.id.toString()!),
-        {
-          ...movie,
-        }
-      );
-
-      toast(
-        `${movie?.title || movie?.original_name} has been added to My List.`,
-        {
-          duration: 8000,
-          style: toastStyle,
-        }
-      );
-    }
-  };
-
-
-
-
 
   // Find all the movies in the user's like
   useEffect(() => {
     if (user) {
       return onSnapshot(
-        collection(db, "customers", user.uid, "myLike"),
+        collection(db, "Movie", user.uid, "myMovie"),
         (snapshot) => setMovies(snapshot.docs)
       );
     }
@@ -147,40 +95,6 @@ function Modal() {
     [movies]
   );
 
-  const handleLike = async () => {
-    if (addedToLike) {
-      await deleteDoc(
-        doc(db, "customers", user!.uid, "myLike", movie?.id.toString()!)
-      );
-
-      toast(
-        `${movie?.title || movie?.original_name} has been removed from My Like`,
-        {
-          duration: 8000,
-          style: toastStyle,
-        }
-      );
-    } else {
-      await setDoc(
-        doc(db, "customers", user!.uid, "myLike", movie?.id.toString()!),
-        {
-          ...movie,
-        }
-      );
-
-      toast(
-        `${movie?.title || movie?.original_name} has been added to My Like.`,
-        {
-          duration: 8000,
-          style: toastStyle,
-        }
-      );
-    }
-  };
-
-
-
-
 
 
   const handleClose = () => {
@@ -188,7 +102,6 @@ function Modal() {
   };
 
   
-
 
   return (
     <MuiModal
@@ -216,28 +129,18 @@ function Modal() {
           />
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
-              <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+              <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]" 
               >
                 <FaPlay className="h-7 w-7 text-black" />
                 Play
-              </button>
-              <button className="modalButton" onClick={handleList}>
-                {addedToList ? (
-                  <CheckIcon className="h-7 w-7" />
-                ) : (
-                  <PlusIcon className="h-7 w-7" />
-                )}
+                
+                
               </button>
 
+
               <button className="modalButton" 
-              onClick={handleLike}
               >
-              {addedToLike ? (
-                  <ThumbUpIcon className="h-7 w-7" />
-                ) : (
-                  <ThumbUpIcon className="h-7 w-7" />
-                )}
-                {/* <ThumbUpIcon className="h-7 w-7" /> */}
+              
               </button>
             </div>
             <button className="modalButton" onClick={() => setMuted(!muted)}>

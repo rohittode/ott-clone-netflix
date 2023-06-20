@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import router from "next/router";
 import { useState } from "react";
 
 export default function BasicMenu() {
@@ -14,6 +15,23 @@ export default function BasicMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const list = () => {
+    router.push("/MyList");
+  };
+
+  const home = () => {
+    router.push("/Home");
+  };
+
+  const like = () => {
+    router.push("/MyLike");
+  };
+
+  const movie = () => {
+    router.push("/MyMovie");
+  };
+
 
   return (
     <div className="md:!hidden">
@@ -37,11 +55,12 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Home</MenuItem>
+        <MenuItem onClick={home}>Home</MenuItem>
         <MenuItem onClick={handleClose}>TV Shows</MenuItem>
-        <MenuItem onClick={handleClose}>Movies</MenuItem>
+        <MenuItem onClick={movie}>Movies</MenuItem>
         <MenuItem onClick={handleClose}>New & Popular</MenuItem>
-        <MenuItem onClick={handleClose}>My List</MenuItem>
+        <MenuItem onClick={list}>My List</MenuItem>
+        <MenuItem onClick={like}>My Like</MenuItem>
       </Menu>
     </div>
   );
